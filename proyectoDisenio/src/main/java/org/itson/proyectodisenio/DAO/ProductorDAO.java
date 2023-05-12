@@ -11,24 +11,24 @@ import com.mongodb.client.model.Filters;
 import exceptions.DAOException;
 import java.util.ArrayList;
 import org.bson.types.ObjectId;
+import org.itson.proyectodisenio.dominio.Productor;
 import org.itson.proyectodisenio.dominio.Residuo;
 
 /**
  *
  * @author hoshi
  */
-public class ResiduosDAO extends BaseDAO<Residuo>{
+public class ProductorDAO extends BaseDAO<Productor>{
 
-    
     @Override
-    public void guardar(Residuo entidad) {
-       MongoCollection<Residuo> residuo= this.getCollection();
-       residuo.insertOne(entidad);
+    public void guardar(Productor entidad) {
+       MongoCollection<Productor> productor= this.getCollection();
+       productor.insertOne(entidad);
     }
 
     @Override
-    public void eliminar(Residuo entidad) throws DAOException {
-       MongoCollection<Residuo> coleccionP = this.getCollection();
+    public void eliminar(Productor entidad) throws DAOException {
+         MongoCollection<Productor> coleccionP = this.getCollection();
         // primera forma de hacerlo como lo habiamos visto
         //Document filtroEliminacion = new Document("_id", entidad.getId());
         //coleccionP.deleteOne(filtroEliminacion);
@@ -36,35 +36,32 @@ public class ResiduosDAO extends BaseDAO<Residuo>{
         coleccionP.deleteOne(Filters.eq("_id", entidad.getId()));
     }
 
-    //FALTA
     @Override
-    public void actualizar(Residuo entidad) throws DAOException {
+    public void actualizar(Productor entidad) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Residuo buscarPorID(ObjectId id) {
-        MongoCollection coleccion = getCollection();
-        Residuo r = (Residuo) coleccion.find(Filters.eq("_id", id)).first();
-        return r;
+    public Productor buscarPorID(ObjectId id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<Residuo> buscarTodos() {
-        MongoCollection<Residuo> coleccionR = this.getCollection();
-        MongoCursor<Residuo> resultadoConsulta = coleccionR.find().iterator();
-        ArrayList<Residuo> listaR = new ArrayList<>();
+    public ArrayList<Productor> buscarTodos() {
+        MongoCollection<Productor> coleccionP = this.getCollection();
+        MongoCursor<Productor> resultadoConsulta = coleccionP.find().iterator();
+        ArrayList<Productor> listaP = new ArrayList<>();
         while (resultadoConsulta.hasNext()) {
-            listaR.add(resultadoConsulta.next());
+            listaP.add(resultadoConsulta.next());
         }
-        return listaR;
+        return listaP;
     }
 
-    @Override
-    public MongoCollection<Residuo> getCollection() {
+   @Override
+    public MongoCollection<Productor> getCollection() {
         MongoDatabase db = this.getMongoDB("residuosBD");
-        MongoCollection<Residuo> colleccionResiduos = db.getCollection("residuo", Residuo.class);
-        return colleccionResiduos;
+        MongoCollection<Productor> colleccionProductor = db.getCollection("productor", Productor.class);
+        return colleccionProductor;
     }
     
 }

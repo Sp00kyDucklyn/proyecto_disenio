@@ -4,10 +4,31 @@
  */
 package org.itson.proyectodisenio.dominio;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author hoshi
  */
 public class Gobierno {
+    private ObjectId id;
+    
+    public Gobierno(){
+        
+    }
+
+    public Gobierno(ObjectId id) {
+        this.id = id;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    
     
 }
